@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Get The Unfair Market Advantage</title>
+    
+    <script>
+        !function(f,b,e,v,n,t,s)
+        {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+        n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+        if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+        n.queue=[];t=b.createElement(e);t.async=!0;
+        t.src=v;s=b.getElementsByTagName(e)[0];
+        s.parentNode.insertBefore(t,s)}(window, document,'script',
+        'https://connect.facebook.net/en_US/fbevents.js');
+        fbq('init', '1688652759077735');
+        fbq('track', 'PageView'); 
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=1688652759077735&ev=PageView&noscript=1"/></noscript>
+
+    <style>
+        /* 基础页面设置：深色背景与自适应网格线 */
+        body {
+            margin: 0; 
+            padding: 0; 
+            background-color: #050a15; 
+            background-image: 
+                linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+            background-size: clamp(40px, 5vw, 60px) clamp(40px, 5vw, 60px); 
+            color: #ffffff;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            display: flex; 
+            flex-direction: column; 
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        /* 响应式自适应容器：PC端大气舒展，移动端完美贴合 */
+        .container {
+            max-width: 750px; 
+            margin: 0 auto;
+            padding: clamp(40px, 8vh, 80px) clamp(20px, 4vw, 40px);
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        /* Logo 区域样式 */
+        .logo-area {
+            display: flex;
+            align-items: center;
+            font-size: clamp(20px, 2.5vw, 24px);
+            font-weight: 700;
+            margin-bottom: clamp(30px, 6vh, 60px);
+            color: #ffffff;
+        }
+        .logo-area svg {
+            width: 24px;
+            height: 24px;
+            margin-right: 10px;
+            fill: #ffffff;
+        }
+
+        /* 核心流式排版：主标题与副标题 */
+        h1 { 
+            font-size: clamp(34px, 5vw, 54px); 
+            font-weight: 800; 
+            margin: 0 0 25px 0; 
+            line-height: 1.15; 
+            letter-spacing: -0.5px;
+        }
+
+        h2 { 
+            font-size: clamp(26px, 4vw, 34px); 
+            font-weight: 400; 
+            margin: 0 0 25px 0; 
+            line-height: 1.4; 
+            color: #cbd5e1;
+        }
+        
+        /* 统一的高亮文字样式：科技蓝 + 加粗 */
+        .text-blue {
+            color: #2b7afc; 
+            font-weight: 700; 
+        }
+
+        /* 区域二：详情与分点列表样式 */
+        .desc-box {
+            margin-bottom: clamp(35px, 6vh, 50px);
+        }
+
+        p.desc-intro { 
+            font-size: clamp(20px, 3vw, 26px); 
+            color: #94a3b8; 
+            margin: 0 0 20px 0; 
+            line-height: 1.6; 
+        }
+
+        /* 分点列表：Flex 布局确保移动端换行时不错位 */
+        ul.benefits-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul.benefits-list li {
+            display: flex;
+            align-items: flex-start;
+            gap: clamp(10px, 2vw, 15px);
+            font-size: clamp(18px, 2.8vw, 22px);
+            color: #f1f5f9;
+            margin-bottom: clamp(12px, 2vh, 18px);
+            line-height: 1.5;
+        }
+
+        /* Emoji 图标大小微调 */
+        .emoji-icon {
+            flex-shrink: 0; /* 防止图标被压缩 */
+            font-size: clamp(20px, 3vw, 24px);
+            line-height: 1.4;
+        }
+
+        /* 红色大按钮样式 */
+        #manual-btn {
+            display: block; 
+            background: linear-gradient(180deg, #ef4444 0%, #b91c1c 100%);
+            color: #fff;
+            padding: clamp(16px, 2.5vw, 20px) 20px; 
+            border-radius: 8px; 
+            text-decoration: none;
+            font-weight: 700; 
+            font-size: clamp(18px, 2.2vw, 21px); 
+            text-align: center;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 20px rgba(220, 38, 38, 0.4);
+            border: 1px solid #991b1b;
+            width: 100%;
+            max-width: 480px; 
+            box-sizing: border-box;
+            margin-bottom: 25px;
+        }
+        #manual-btn:hover { 
+            transform: translateY(-2px); 
+            box-shadow: 0 6px 25px rgba(220, 38, 38, 0.6);
+        }
+        #manual-btn:active {
+            transform: translateY(1px);
+        }
+
+        /* 底部免责声明小字 */
+        .disclaimer {
+            font-size: clamp(11px, 1.5vw, 13px);
+            color: #475569;
+            line-height: 1.6;
+            margin-top: 15px;
+            max-width: 550px;
+        }
+        .disclaimer a { color: #2b7afc; text-decoration: underline; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="logo-area">
+            <svg viewBox="0 0 24 24"><path d="M3 3h2v18H3V3zm4 8h2v10H7V11zm4-5h2v15h-2V6zm4 7h2v8h-2v-8zm4-4h2v12h-2V9z"/></svg>
+            Trading Wire
+        </div>
+
+        <h1>Stop Guessing. Get The <span class="text-blue">Unfair Market Advantage</span>.</h1>
+        
+        <h2><span class="text-blue">Exclusive</span> Crypto & Stock Intel Before The Masses Catch On.</h2>
+        
+        <div class="desc-box">
+            <p class="desc-intro">
+                Stop watching others win. Secure your <span class="text-blue">limited free spot</span> in our <span class="text-blue">private WhatsApp network</span>:
+            </p>
+            <ul class="benefits-list">
+                <li>
+                    <span class="emoji-icon">💎</span>
+                    <span><span class="text-blue">100% Free access</span> for a limited time</span>
+                </li>
+                <li>
+                    <span class="emoji-icon">🔥</span>
+                    <span><span class="text-blue">Early setups</span> on explosive crypto & stocks</span>
+                </li>
+                <li>
+                    <span class="emoji-icon">💡</span>
+                    <span><span class="text-blue">Simple strategies</span> without complicated courses</span>
+                </li>
+            </ul>
+        </div>
+        
+        <a href="#" id="manual-btn" target="_blank">
+            Tap Here & Hit "SEND" In WhatsApp
+        </a>
+
+        <div class="disclaimer">
+            By tapping the button above you are signing up to receive WhatsApp messages. Consent is not a condition of purchase. Additionally, you agree to the following <a href="#">Privacy Policy</a> and <a href="#">Disclaimer</a>.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            // 1. 客服号码池
+            const whatsappPool = [
+                 { phone: "61451476759", text: "Hi! I want to claim my spot. Please send me the access details." }
+            ];
+
+            // 2. 24小时防撞单分配缓存
+            const LOCK_DURATION = 180 * 24 * 60 * 60 * 1000; 
+            const now = new Date().getTime();
+            let selectedTarget = null;
+            const cachedShuntData = localStorage.getItem('wa_assigned_client');
+            
+            if (cachedShuntData) {
+                try {
+                    const parsedData = JSON.parse(cachedShuntData);
+                    if (now - parsedData.timestamp < LOCK_DURATION) {
+                        selectedTarget = parsedData.target;
+                    }
+                } catch (err) {
+                    localStorage.removeItem('wa_assigned_client');
+                }
+            }
+
+            if (!selectedTarget) {
+                const randomIndex = Math.floor(Math.random() * whatsappPool.length);
+                selectedTarget = whatsappPool[randomIndex];
+                localStorage.setItem('wa_assigned_client', JSON.stringify({ target: selectedTarget, timestamp: now }));
+            }
+
+            // 3. 操作系统精确嗅探
+            const targetPhone = selectedTarget.phone;
+            const encodedText = encodeURIComponent(selectedTarget.text);
+            const ua = navigator.userAgent || navigator.vendor || window.opera;
+            const isAndroid = /Android/i.test(ua);
+            
+            let userOS = 'Other';
+            if (isAndroid) userOS = 'Android';
+            else if (/iPad|iPhone|iPod/i.test(ua)) userOS = 'iOS';
+            else if (/Mac/i.test(ua)) userOS = 'Mac';
+            else if (/Windows/i.test(ua)) userOS = 'Windows';
+
+            // 4. 构建底层协议链
+            const androidIntent = `intent://send?phone=${targetPhone}&text=${encodedText}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
+            const universalSafeUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodedText}`;
+
+            let targetUrl = universalSafeUrl; 
+            if (isAndroid) {
+                targetUrl = androidIntent; 
+            }
+            
+            // 绑定链接到手动跳转按钮
+            const manualBtn = document.getElementById('manual-btn');
+            manualBtn.href = targetUrl;
+
+            // 5. 基于点击动作的精准 Contact 追踪
+            let eventFired = false;
+            function fireContactEvent() {
+                if (!eventFired && typeof fbq === 'function') {
+                    fbq('track', 'Contact', {
+                        traffic_source: 'Meta_Lead_Form_Manual', 
+                        assigned_whatsapp: targetPhone,          
+                        user_os: userOS,                         
+                        action_source: 'website'                 
+                    });
+                    eventFired = true; 
+                    console.log("Contact Event Fired Successfully.");
+                }
+            }
+
+            // 用户点击红色按钮时触发回传
+            manualBtn.addEventListener('click', function() {
+                fireContactEvent();
+            });
+
+        });
+    </script>
+</body>
+</html>
