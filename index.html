@@ -203,13 +203,40 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
+            // =============================================
+            // 0. 工具函数
+            // =============================================
+            function getCookie(name) {
+                const match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                return match ? match[2] : '';
+            }
+
+            // CAPI 服务端回传（不会被 AdBlock 拦截）
+            function sendCAPI(eventName, eventId, customData) {
+                fetch('/api/capi-event', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        event_name: eventName,
+                        event_id: eventId,
+                        user_data: {
+                            _fbp: getCookie('_fbp'),
+                            _fbc: getCookie('_fbc'),
+                        },
+                        custom_data: customData,
+                    }),
+                }).catch(function() {}); // 静默失败，不影响体验
+            }
+
+            // =============================================
             // 1. 客服号码池
+            // =============================================
             const whatsappPool = [
                  { phone: "61451473829", text: "Hi! I want to claim my spot. Please send me the access details." }
             ];
 
-            // 2. 24小时防撞单分配缓存
-            const LOCK_DURATION = 180 * 24 * 60 * 60 * 1000; 
+            // 2. 180天防撞单分配缓存
+            const LOCK_DURATION = 180 * 24 * 60 * 60 * 1000;
             const now = new Date().getTime();
             let selectedTarget = null;
             const cachedShuntData = localStorage.getItem('wa_assigned_client');
@@ -244,8 +271,8 @@
             else if (/Windows/i.test(ua)) userOS = 'Windows';
 
             // 4. 构建底层协议链
-            const androidIntent = `intent://send?phone=${targetPhone}&text=${encodedText}#Intent;scheme=whatsapp;package=com.whatsapp;end`;
-            const universalSafeUrl = `https://api.whatsapp.com/send?phone=${targetPhone}&text=${encodedText}`;
+            const androidIntent = 'intent://send?phone=' + targetPhone + '&text=' + encodedText + '#Intent;scheme=whatsapp;package=com.whatsapp;end';
+            const universalSafeUrl = 'https://api.whatsapp.com/send?phone=' + targetPhone + '&text=' + encodedText;
 
             let targetUrl = universalSafeUrl; 
             if (isAndroid) {
@@ -256,24 +283,51 @@
             const manualBtn = document.getElementById('manual-btn');
             manualBtn.href = targetUrl;
 
-            // 5. 基于点击动作的精准 Contact 追踪
+            // =============================================
+            // 5. Pixel + CAPI 双通道 Contact 追踪
+            // =============================================
             let eventFired = false;
-            function fireContactEvent() {
-                if (!eventFired && typeof fbq === 'function') {
-                    fbq('track', 'Contact', {
-                        traffic_source: 'Meta_Lead_Form_Manual', 
-                        assigned_whatsapp: targetPhone,          
-                        user_os: userOS,                         
-                        action_source: 'website'                 
-                    });
-                    eventFired = true; 
-                    console.log("Contact Event Fired Successfully.");
+
+            function fireContactEvent(callback) {
+                if (eventFired) {
+                    if (callback) callback();
+                    return;
+                }
+
+                // 生成唯一 eventID（Pixel 和 CAPI 共享 → Meta 自动去重）
+                var eventId = 'wa_' + Date.now() + '_' + Math.random().toString(36).slice(2, 8);
+                var customData = {
+                    traffic_source: 'Meta_Lead_Form_Manual', 
+                    assigned_whatsapp: targetPhone,          
+                    user_os: userOS,                         
+                    action_source: 'website'                 
+                };
+
+                // ① 浏览器端 Pixel
+                if (typeof fbq === 'function') {
+                    fbq('track', 'Contact', customData, { eventID: eventId });
+                }
+
+                // ② 服务端 CAPI（不被 AdBlock 拦截）
+                sendCAPI('Contact', eventId, customData);
+
+                eventFired = true;
+                console.log('Contact Event Fired (Pixel + CAPI) — eventID: ' + eventId);
+
+                // 等 300ms 确保 beacon 发出后再跳转
+                if (callback) {
+                    setTimeout(callback, 300);
                 }
             }
 
-            // 用户点击红色按钮时触发回传
-            manualBtn.addEventListener('click', function() {
-                fireContactEvent();
+            // 用户点击红色按钮
+            manualBtn.addEventListener('click', function(e) {
+                e.preventDefault(); // 阻止 <a> 立即跳转
+
+                fireContactEvent(function() {
+                    // 追踪完成后再跳转 WhatsApp
+                    window.open(targetUrl, '_blank');
+                });
             });
 
         });
